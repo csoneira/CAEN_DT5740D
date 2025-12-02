@@ -9,7 +9,6 @@
 OPEN USB 0 0                # Range: link index ≥0, board address ≥0. Selects the USB chain (0) and board 0.
 
 RECORD_LENGTH      1024     # Range: multiples of 8 samples up to the board memory (e.g., 136–1024). Sets samples per event.
-DECIMATION_FACTOR  1        # Range: 0–7 (if supported). Firmware averaging factor; 1 keeps native rate.
 POST_TRIGGER       50       # Range: 0–99 (%). Portion of the record acquired after the trigger time.
 
 # Signals are positive
