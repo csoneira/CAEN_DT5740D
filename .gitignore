@@ -1,3 +1,43 @@
+# Build and binary artifacts
+*.exe
+*.dll
+*.so
+*.dylib
+*.o
+*.obj
+*.a
+*.lib
+*.mod
+*.smod
+
+# Python caches and virtual envs
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+pip-wheel-metadata/
+
+# Logs and temporary files
+*.log
+*.tmp
+*.swp
+*.swo
+*.bak
+*.old
+
+# Editor/IDE settings
+.DS_Store
+.vscode/
+.idea/
+*.code-workspace
+
+# Project-specific outputs
 JUNK/
 readwdbin/PYTHON_OUTPUTS/
 ESSENTIAL/ESSENTIAL_OUTPUTS/
+*.dat
+DATA/

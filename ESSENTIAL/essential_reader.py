@@ -161,6 +161,13 @@ def main() -> None:
     max_events_cfg = cfg.get("max_events", 0)
 
     input_cfg = InputConfig(Path(args.input).resolve())
+    print("")
+    print("############################################################")
+    print(f"# RECORD_LENGTH in input_dt5740.txt = {input_cfg.samples}")
+    print("# IMPORTANT: ensure WaveDump's RECORD_LENGTH matches this value")
+    print("# so the Python reader and the acquisition share the same window.")
+    print("############################################################")
+    print("")
     output_dir = resolve_paths(base, [cfg.get("output_dir", "ESSENTIAL_OUTPUTS")])[0]
     output_dir.mkdir(parents=True, exist_ok=True)
     results_path = output_dir / "integrals.csv"

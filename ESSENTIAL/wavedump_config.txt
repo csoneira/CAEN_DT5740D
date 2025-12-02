@@ -1,0 +1,69 @@
+# ****************************************************************
+# WaveDump Configuration for DT5740
+# Trigger Source: ANY CHANNEL (0 to 31) – every channel can self-trigger.
+# Acquisition: ALL groups (0–3) enabled so all 32 channels are read out simultaneously.
+# Reference: UM3364 (DT5740 User Manual) + UM7934 (WaveDump User Manual).
+# ****************************************************************
+
+[COMMON]
+OPEN USB 0 0                # Range: link index ≥0, board address ≥0. Selects the USB chain (0) and board 0.
+
+RECORD_LENGTH      1024     # Range: multiples of 8 samples up to the board memory (e.g., 136–1024). Sets samples per event.
+DECIMATION_FACTOR  1        # Range: 0–7 (if supported). Firmware averaging factor; 1 keeps native rate.
+POST_TRIGGER       50       # Range: 0–99 (%). Portion of the record acquired after the trigger time.
+
+# Signals are positive
+PULSE_POLARITY     POSITIVE # Range: POSITIVE / NEGATIVE. Determines how baselines/thresholds are interpreted.
+EXTERNAL_TRIGGER   DISABLED # Range: DISABLED / ACQUISITION_ONLY / ACQUISITION_AND_TRGOUT. Controls TRG-IN handling.
+FPIO_LEVEL         NIM      # Range: NIM / TTL. Sets the digital I/O voltage standard.
+
+OUTPUT_FILE_FORMAT  BINARY  # Range: BINARY / ASCII. Binary required for ESSENTIAL pipeline.
+OUTPUT_FILE_HEADER  YES     # Range: YES / NO. Adds ASCII header to files when YES.
+TEST_PATTERN        NO      # Range: YES / NO. Internal ramp generator for diagnostics.
+
+# Defaults
+ENABLE_INPUT          NO    # Range: YES / NO. Initial state for groups unless overridden.
+CHANNEL_TRIGGER       DISABLED # Range: DISABLED / ACQUISITION_ONLY / ACQUISITION_AND_TRGOUT / TRGOUT_ONLY.
+
+# ----------------------------------------------------------------
+# GROUP 0 (Channels 0-7)
+# ----------------------------------------------------------------
+[0]
+ENABLE_INPUT           YES   # Range: YES / NO. Enables group 0 (CH0–7).
+BASELINE_LEVEL         10    # Range: 0–100 (% of FSR). Coarse DC shift for the group.
+TRIGGER_THRESHOLD      300   # Range: 0–4095 ADC counts above baseline. Comparator threshold for this group.
+
+# Mask FF = 1111 1111 (Binary) -> All 8 channels can trigger
+GROUP_TRG_ENABLE_MASK  FF    # Range: 00–FF hex. Bitmask of channels participating in the group trigger.
+
+CHANNEL_TRIGGER        ACQUISITION_ONLY # Range: DISABLED / ACQUISITION_ONLY / ACQUISITION_AND_TRGOUT / TRGOUT_ONLY.
+
+# ----------------------------------------------------------------
+# GROUP 1 (Channels 8-15)
+# ----------------------------------------------------------------
+[1]
+ENABLE_INPUT           YES
+BASELINE_LEVEL         10
+TRIGGER_THRESHOLD      300
+GROUP_TRG_ENABLE_MASK  FF
+CHANNEL_TRIGGER        ACQUISITION_ONLY
+
+# ----------------------------------------------------------------
+# GROUP 2 (Channels 16-23)
+# ----------------------------------------------------------------
+[2]
+ENABLE_INPUT           YES
+BASELINE_LEVEL         10
+TRIGGER_THRESHOLD      300
+GROUP_TRG_ENABLE_MASK  FF
+CHANNEL_TRIGGER        ACQUISITION_ONLY
+
+# ----------------------------------------------------------------
+# GROUP 3 (Channels 24-31)
+# ----------------------------------------------------------------
+[3]
+ENABLE_INPUT           YES
+BASELINE_LEVEL         10
+TRIGGER_THRESHOLD      300
+GROUP_TRG_ENABLE_MASK  FF
+CHANNEL_TRIGGER        ACQUISITION_ONLY
