@@ -66,6 +66,11 @@ def main() -> None:
         counts[counts <= args.threshold] = 0.0
         centers = edges[:-1]
 
+        # If bin has 0 counts, do not plot it not even in x
+        cond = counts != 0
+        counts = counts[cond]
+        centers = centers[cond]
+
         fig = plt.figure(figsize=(8, 4.5))
         plt.step(centers, counts, where="post", lw=1.5, color="tab:blue")
         plt.fill_between(centers, counts, step="post", alpha=0.2, color="tab:blue")
